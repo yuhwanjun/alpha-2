@@ -12,11 +12,11 @@
       <p>별점: {{ bookInfo.subInfo.ratingInfo.ratingScore }}</p>
       <!-- <pre>{{ bookInfo }}</pre> -->
     </div>
-    <h2>도서 정보:</h2>
     <button @click="fetchData">데이터 가져오기</button>
     <div class="book-wrap" v-if="bookData">
       <div class="book-item" v-for="(book, index) in bookData.item" :key="index">
         <div @click="testData(book.isbn)">
+          <img v-if="book.cover" :src="book.cover" alt="책 표지 이미지" />
           <p><strong>제목:</strong> {{ book.title }}</p>
           <p><strong>저자:</strong> {{ book.author }}</p>
           <p><strong>출판일:</strong> {{ book.pubDate }}</p>
@@ -45,7 +45,7 @@ export default {
         const params = {
           ttbkey: 'ttbyuhwanjun1232001',
           QueryType: 'Bestseller',
-          MaxResults: 10,
+          MaxResults: 100,
           start: 1,
           SearchTarget: 'Book',
           output: 'js',
