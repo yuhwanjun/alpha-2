@@ -1,58 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Title List Page</title>
-    <!-- Vue.js CDN 포함 -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-    <!-- Axios CDN 포함 -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-</head>
-<body>
-    <!-- Vue.js 앱을 마운트할 엘리먼트 -->
-    <div id="app">
-        <h1>Title List</h1>
-        <ul>
-            <!-- Vue.js를 사용하여 제목 목록을 표시 -->
-            <li v-for="title in titleList" :key="title">{{ title }}</li>
-        </ul>
-    </div>
-
-    <script>
-        // Vue.js 앱 인스턴스 생성
-        const key = 'ttbyuhwanjun1232001';
-        new Vue({
-            el: '#app',
-            data: {
-                // 제목 목록 데이터
-                titleList: [],
-            },
-            mounted() {
-                // API에서 데이터 가져오기
-                axios.get(`https://www.aladin.co.kr/ttb/api/ItemList.aspx?ttbkey=ttbyuhwanjun1232001&QueryType=ItemNewAll&MaxResults=100&start=1&SearchTarget=Book&output=json&Version=20131101&CategoryId=50993`)
-                    .then(response => {
-                        // API 응답에서 제목 목록 추출
-                        const responseData = response.data;
-                        if (responseData.item && responseData.item.length > 0) {
-                            this.titleList = responseData.item.map(item => item.title);
-                        }
-                    })
-                    .catch(error => {
-                        if (error.response) {
-                            // 서버가 응답을 반환하지만 상태 코드가 오류인 경우
-                            console.error('응답 오류:', error.response.data);
-                        } else if (error.request) {
-                            // 요청은 보냈지만 응답을 받지 못한 경우 (네트워크 오류 등)
-                            console.error('요청 오류:', error.message);
-                        } else {
-                            // 오류를 발생시킨 요청을 설정하는 중에 오류가 발생한 경우
-                            console.error('요청 설정 오류:', error.message);
-                        }
-                    });
-                    
-            },
-        });
-    </script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + Vue + TS</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>
